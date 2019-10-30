@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.0/css/ol.css" type="text/css">
+    <style>
+      .map {
+        height: 500px;
+        width: 600px;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.0/build/ol.js"></script>
+    <title>Fire Tracker</title>
+  </head>
+  <body>
+    <h2>California Map </h2>
+    <div id="map" class="map"></div>
+    <script type="text/javascript">
+      
+      var map = new ol.Map({
+        target: 'map',
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM()
+          })
+        ],
+        
+        view: new ol.View({
+          center: ol.proj.fromLonLat([-118.2437, 34.0522]),
+          zoom: 4
+        })
+      });
+    </script>
+
+  </body>
+</html>
+
+<!-- Brainstorm for how we can move a parameter from object to object
+
+if parameter = city name
+objects will be the search bar, the map, and the news page
+
+
+the parameter has to jump from object to object first, search bar then, map finally news page
+
+-->
+
