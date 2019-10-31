@@ -9,9 +9,9 @@ let data = $("#input").val();
 
 var queryURL =
 	"https://newsapi.org/v2/everything?" +
-	"q=+Wildfires in Los Angeles County&" +
+	"q=+Wildfires in Los Angeles County" +
 	data +
-	"from=2019-10-01&" +
+	"&from=2019-10-01&" +
 	"sortBy=popularity&" +
 	"pageSize=5&" +
 	"apiKey=88aee6a7ec7d47f4bfcafa15b86b0599";
