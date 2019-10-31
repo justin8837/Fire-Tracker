@@ -5,39 +5,45 @@
 //need to make it interact with the search bar
 
 //no need to touch URL atm
+let data = $("#input").val();
+
 var queryURL =
 	"https://newsapi.org/v2/everything?" +
-	"pageSize10&" +
 	"q=+Wildfires in Los Angeles County&" +
+	data +
 	"from=2019-10-01&" +
 	"sortBy=popularity&" +
 	"pageSize=5&" +
 	"apiKey=88aee6a7ec7d47f4bfcafa15b86b0599";
 
 var req = new Request(queryURL);
+let url = [];
 //function to clear the article area
 function clear() {
 	$(".newsContainer").empty();
 }
-//required code given by news api
-fetch(req).then(function(response) {
-	console.log(response.json());
-});
 
-//need to ask about how to grab article
-// let numArticles = 5;
-// for (i = 0; i < response.articles.length; i++) {
-// 	let articles;
-
+console.log(data);
 //area to grab relevent data on click
-$("#search-btn").on("click", function(event) {
+$("#search ").on("click", function(event) {
 	event.preventDefault();
-	console.log("#search-btn");
-	clear();
+
 	$.ajax({
 		url: queryURL,
-		method: "get"
-	})
-		.then //need to append);
-		();
+		method: "GET"
+	}).then(function(event) {
+		let newsCont = $("#newsContainer");
+		newsCont.empty();
+
+		for (let i = 0; i < event.articles.length; i++) {
+			let url = event.articles[i].url;
+			let aEl = $("<a>");
+			let title = event.articles[i].title;
+			aEl.attr("href", url);
+			aEl.text(title);
+			newsCont.append(aEl);
+			console.log(newsCont);
+			let stringfyArt = event.articles[i];
+		}
+	});
 });
