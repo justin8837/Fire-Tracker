@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.0/css/ol.css"
+			type="text/css"
+		/>
+		<style>
+			.map {
+				height: 400px;
+				width: 500px;
+			}
+		</style>
+		<script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.0/build/ol.js"></script>
+		<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+		
+		<title>Fire Tracker</title>
+	</head>
+	<body>
+		<h2>California Map</h2>
+		<div id="map" class="map"></div>
+		<div id="searchBar">search</div>
+		<script src="https://code.jquery.com/jquery.js"></script>
+		<input id="location"></input>
+		<button id="search">search</button>
+		<script type="text/javascript">
+		
+			$('#search').on("click", function(event){
+				let dataInput = $("#location").val().trim();
+				let queryURL =
+				"https://api.opencagedata.com/geocode/v1/json?q=" +
+				dataInput +
+				"&key=f0850a731b144cb69211841cba0efbb2";
+			let APIkey = "f0850a731b144cb69211841cba0efbb2";
+			console.log(queryURL);
+
+			$('#map').empty();
+
+			//ajax call to convert text to lon,lat
+			$.ajax({
+				url: queryURL,
+				method: "get"
+			}).then(function(response) {
+				console.log(response);
+				//put the response into the maps
+				//get lng and lat
+				console.log(response.results[0].geometry);
+				let lngLocation = response.results[0].geometry.lng;
+				let latLocation = response.results[0].geometry.lat;
+				console.log(lngLocation);
+				console.log(latLocation);
+				//find out how open layers grab lon lat data
+				//see if it focuses on the search
+				var map = new ol.Map({
+					target: "map",
+					layers: [
+						new ol.layer.Tile({
+							source: new ol.source.OSM()
+						})
+					],
+					
+					view: new ol.View({
+						center: ol.proj.fromLonLat([lngLocation, latLocation]),
+						zoom: 13
+					})
+				});
+				});
+			})
+			
+
+			</script>
+	</body>
+</html>
+
+<!-- Brainstorm for how we can move a parameter from object to object
+if parameter = city name
+objects will be the search bar, the map, and the news page
+the parameter has to jump from object to object first, search bar then, map finally news 
+-->
