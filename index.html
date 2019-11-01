@@ -1,72 +1,212 @@
 <!doctype html>
 <html lang="en">
-<<<<<<< HEAD
-	<head>
-		<link
-			rel="stylesheet"
-			href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css"
-			type="text/css"
-		/>
-		<style>
-			.map {
-				height: 400px;
-				width: 100%;
-			}
-		</style>
-		<script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
-		<title>OpenLayers example</title>
-	</head>
-
-	<body>
-		<h2>My Map</h2>
-		<div id="map" class="map"></div>
-		<script type="text/javascript">
-			var map = new ol.Map({
-				target: "map",
-				layers: [
-					new ol.layer.Tile({
-						source: new ol.source.OSM()
-					})
-				],
-				view: new ol.View({
-					center: ol.proj.fromLonLat([37.41, 8.82]),
-					zoom: 4
-				})
-			});
-		</script>
-		<input id ='input' value=""></input>
-		<button id="search">search</button>
-		<div id="newsContainer"></div>
-		<script src="https://code.jquery.com/jquery.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
-		<script src="articles.js"></script>
-	</body>
-</html>
-=======
   <head>
-    <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.0/css/ol.css" type="text/css">
+     <!--Import Google Icon Font-->
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+     <!--Import materialize.css-->
+     <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"  media="screen,projection"/>
+     <!--Let browser know website is optimized for mobile-->
+     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- font awesome for search bar link -->
+    <script src="https://kit.fontawesome.com/4545b62ebd.js" crossorigin="anonymous"></script>
+    <!-- openlayers map source -->
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.0/build/ol.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+   
 
-    <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
-    <title>OpenLayers example</title>
-    <link rel="stylesheet" href="style.css"/>
+    
+	<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+    
+  <title>Fire Tracker</title>
   </head>
-  <body>
-    <h2>Fire Tracker</h2>
-    <div id="map" class="map"></div>
-    <script type="text/javascript">
-      var map = new ol.Map({
-        target: 'map',
-        layers: [
-          new ol.layer.Tile({
-            source: new ol.source.OSM()
-          })
-        ],
-        view: new ol.View({
-          center: ol.proj.fromLonLat([37.41, 8.82]),
-          zoom: 4
+  
+  <body background="https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80">
+
+    
+     <!-- header row -->
+     <div class="container">
+            <div class="row">
+                <div class="col s12">
+                        <nav>
+                                <div class="nav-wrapper">
+                                  <a class="logo">Fire Trackers</a>
+                                  <ul id="nav-mobile" >
+                                      <li>
+                                    
+                                            <input type="text" placeholder="Search Location">
+                                            <button id="search">Enter</button>
+                                     </li>
+                                   
+                                  </ul>
+                                </div>
+                        </nav>
+                </div>
+                
+            </div>
+
+
+           
+        <!-- map row -->
+    
+       
+            <div class="row">
+                <div class="col s12">
+                    <div class="mapTitle">Los Angeles County</div>
+                    <div id="map" class="map"></div>
+                </div>
+            </div>
+     
+
+         <!-- footer with article links -->
+
+         
+                        <footer class="page-footer">
+                                <div class="container">
+                                  <div class="row">
+                                    <div class="col l6 s12">
+                                      <h5 class="white-text">Articles</h5>
+                                      <ul id="newsContainer">
+                                            <li><a class="grey-text text-lighten-3" href="#!"></a></li>
+                                            <li><a class="grey-text text-lighten-3" href="#!"></a></li>
+                                            <li><a class="grey-text text-lighten-3" href="#!"></a></li>
+                                            <li><a class="grey-text text-lighten-3" href="#!"></a></li>
+                                        </ul>
+                                    </div>
+                                    
+                                  </div>
+                                </div>
+    
+                                <div class="footer-copyright">
+                                  <div class="container" style="text-align: center">
+                                  © 2019 Copyright
+                                  </div>
+                                </div>
+                        </footer>
+    
+               
+     
+     </div>
+
+    
+   
+     <!-- js section for map-->
+
+     <script type="text/javascript">
+
+
+        var map = new ol.Map({
+                target: 'map',
+                layers: [
+                new ol.layer.Tile({
+                    source: new ol.source.OSM()
+                })
+                ],
+                
+                view: new ol.View({
+                center: ol.proj.fromLonLat([-118.2437, 34.0522]),
+                zoom: 10
+                })
+            });
+
+     
+		
+        $('#search').on("click", function(event){
+            let dataInput = $("#location").val().trim();
+            let queryURL =
+            "https://api.opencagedata.com/geocode/v1/json?q=" +
+            dataInput +
+            "&key=f0850a731b144cb69211841cba0efbb2";
+        let APIkey = "f0850a731b144cb69211841cba0efbb2";
+        console.log(queryURL);
+        $('#map').empty();
+        //ajax call to convert text to lon,lat
+        $.ajax({
+            url: queryURL,
+            method: "get"
+        }).then(function(response) {
+            console.log(response);
+            //put the response into the maps
+            //get lng and lat
+            console.log(response.results[0].geometry);
+            let lngLocation = response.results[0].geometry.lng;
+            let latLocation = response.results[0].geometry.lat;
+            console.log(lngLocation);
+            console.log(latLocation);
+            //find out how open layers grab lon lat data
+            //see if it focuses on the search
+            var map = new ol.Map({
+                target: "map",
+                layers: [
+                    new ol.layer.Tile({
+                        source: new ol.source.OSM()
+                    })
+                ],
+                
+                view: new ol.View({
+                    center: ol.proj.fromLonLat([lngLocation, latLocation]),
+                    zoom: 13
+                })
+            });
+            });
         })
-      });
-    </script>
-  </body>
+
+
+
+
+ // Article js section
+
+        let data = $("#input").val();
+
+        var queryURL =
+            "https://newsapi.org/v2/everything?" +
+            "q=+Wildfires in Los Angeles County" +
+            data +
+            "&from=2019-10-01&" +
+            "sortBy=popularity&" +
+            "pageSize=5&" +
+            "apiKey=88aee6a7ec7d47f4bfcafa15b86b0599";
+
+        var req = new Request(queryURL);
+        let url = [];
+        //function to clear the article area
+        function clear() {
+            $(".newsContainer").empty();
+        }
+
+//console.log(data);
+//area to grab relevent data on click
+$("#search").on("click", function(event) {
+	event.preventDefault();
+    console.log("search")
+	$.ajax({
+		url: queryURL,
+		method: "GET"
+	}).then(function(data) {
+		let newsCont = $("#newsContainer");
+		newsCont.empty();
+        console.log(data)
+        for (let i = 0; i < data.articles.length; i++) {
+			let url = data.articles[i].url;
+			let aEl = $("<a>");
+			let title = data.articles[i].title;
+			aEl.attr("href", url);
+			aEl.text(title);
+			newsCont.append(aEl);
+			console.log(newsCont);
+			let stringfyArt = data.articles[i];
+                    }
+                });
+            });
+                    
+        </script>
+    
+    
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="articles.js"></script>
+  
+    </body>
 </html>
->>>>>>> master
+
