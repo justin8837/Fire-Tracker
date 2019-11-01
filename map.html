@@ -2,6 +2,13 @@
 <html lang="en">
   <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.0/css/ol.css" type="text/css">
+     <!--Import Google Icon Font-->
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+     <!--Import materialize.css-->
+     <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+     <!--Let browser know website is optimized for mobile-->
+     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
     <style>
       .map {
         height: 400px;
@@ -13,7 +20,9 @@
   </head>
   <body>
     <h2>California Map </h2>
+   
     <div id="map" class="map"></div>
+
     <script type="text/javascript">
       
       var map = new ol.Map({
@@ -25,22 +34,19 @@
         ],
         
         view: new ol.View({
-          center: ol.proj.fromLonLat([-118.2437, 34.0522]),
-          zoom: 8
+          center: ol.proj.fromLonLat([-121.4944, 38.5816]),
+          zoom: 6
         })
       });
-    </script>
+   </script>
+
+   
+
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="js/materialize.min.js"></script>
 
   </body>
 </html>
 
-<!-- Brainstorm for how we can move a parameter from object to object
 
-if parameter = city name
-objects will be the search bar, the map, and the news page
-
-
-the parameter has to jump from object to object first, search bar then, map finally news 
-
--->
 
