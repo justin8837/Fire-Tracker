@@ -42,6 +42,7 @@ $("#search ").on("click", function(event) {
 			aEl.attr("href", url);
 			aEl.text(title);
 			newsCont.append(aEl);
+			newsCont.append("<li>");
 			console.log(newsCont);
 			let stringfyArt = event.articles[i];
 		}
